@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "651457108905",
+    "project_id": "login-signup-realtime-a5db8",
+    "storage_bucket": "login-signup-realtime-a5db8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:651457108905:android:2a30dcf3232bc84ce502b8",
+        "android_client_info": {
+          "package_name": "com.example.regfire"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwSvObUQnX3fNMpELkdG0Gbl-OrLN2RQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
