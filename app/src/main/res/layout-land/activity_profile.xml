@@ -20,14 +20,15 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
+        android:id="@+id/profileImg"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:id="@+id/profileImg"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="92dp"
         android:src="@drawable/ic_launcher_foreground"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.09"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,14 +56,14 @@
 
     <ScrollView
         android:id="@+id/scrollView"
-        android:layout_width="366dp"
-        android:layout_height="413dp"
+        android:layout_width="357dp"
+        android:layout_height="194dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.488"
+        app:layout_constraintHorizontal_bias="0.876"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar"
-        app:layout_constraintVertical_bias="0.644"
+        app:layout_constraintVertical_bias="0.435"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -268,8 +269,8 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
-        android:layout_width="376dp"
-        android:layout_height="68dp"
+        android:layout_width="345dp"
+        android:layout_height="57dp"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="16dp"
         android:background="@drawable/bottom_background"
@@ -280,6 +281,7 @@
         app:labelVisibilityMode="unlabeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu"
         tools:ignore="MissingConstraints" />

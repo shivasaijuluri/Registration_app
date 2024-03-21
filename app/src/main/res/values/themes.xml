@@ -8,4 +8,8 @@
     </style>
 
     <style name="Theme.RegFire" parent="Base.Theme.RegFire" />
+    <style name="SlideActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation"> @anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_in_right</item>
+    </style>
 </resources>
