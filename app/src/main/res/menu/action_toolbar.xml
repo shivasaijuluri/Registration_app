@@ -6,6 +6,11 @@
         android:icon="@drawable/baseline_search_24"
         app:showAsAction="ifRoom"/>
     <item
+        android:title="Notification"
+        android:id="@+id/Notification"
+        android:icon="@drawable/baseline_notifications_none_24"
+        app:showAsAction="ifRoom"/>
+    <item
         android:title="Refresh"
         android:id="@+id/Refresh"
         android:icon="@drawable/baseline_refresh_24"

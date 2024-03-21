@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         loginUsername = findViewById(R.id.login_username);
         loginPassword = findViewById(R.id.login_password);
         loginButton = findViewById(R.id.login_button);
@@ -99,17 +98,19 @@ public class LoginActivity extends AppCompatActivity {
                         String nameFromDB = snapshot.child(userUsername).child("name").getValue(String.class);
                         String emailFromDB = snapshot.child(userUsername).child("email").getValue(String.class);
                         String usernameFromDB = snapshot.child(userUsername).child("username").getValue(String.class);
-                        String dobFromDB = snapshot.child(userUsername).child("dob").getValue(String.class); // Fetch DOB from database
+                        String dobFromDB = snapshot.child(userUsername).child("dob").getValue(String.class);
+                        // Fetch DOB from database
 
                         Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
-
-                        intent.putExtra("name", nameFromDB);
-                        intent.putExtra("email", emailFromDB);
-                        intent.putExtra("username", usernameFromDB);
-                        intent.putExtra("password", passwordFromDB);
-                        intent.putExtra("dob", dobFromDB); // Add DOB to the intent
+                        intent.putExtra("FROM_ACTIVITY_1", true);
+                        intent.putExtra("name",nameFromDB);
+                        intent.putExtra("email",emailFromDB);
+                        intent.putExtra("username",usernameFromDB);
+                        intent.putExtra("password",passwordFromDB);
+                        intent.putExtra("dob",dobFromDB);
 
                         startActivity(intent);
+
                     } else {
                         loginPassword.setError("Invalid Credentials");
                         loginPassword.requestFocus();

@@ -5,6 +5,8 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RegFire"
         tools:targetApi="31">
+        <activity
+            android:name=".notification"
+            android:exported="false" />
         <activity
             android:name=".FriendsActivity"
             android:exported="false" />
@@ -32,7 +37,7 @@
         </activity>
         <activity
             android:name=".ProfileActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>

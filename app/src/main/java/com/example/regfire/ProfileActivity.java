@@ -2,21 +2,34 @@ package com.example.regfire;
 
 import static com.example.regfire.R.id.bottomNavigationView;
 
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity {
+    String message = "Hello, this is your notification in detail!!!";
+
 
     TextView profileName, profileEmail, profileUsername, profilePassword, profileDOB;
     TextView titleName, titleUsername, titleDOB;
+    public static String nameUser, emailUser, usernameUser, passwordUser, dobUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,14 @@ public class ProfileActivity extends AppCompatActivity {
         titleDOB = findViewById(R.id.titleDOB); // Initialize the TextView for DOB
 
         showAllUserData();
+
+        titleName.setText(nameUser);
+        titleUsername.setText(usernameUser);
+        profileName.setText(nameUser);
+        profileEmail.setText(emailUser);
+        profileUsername.setText(usernameUser);
+        profilePassword.setText(passwordUser);
+        profileDOB.setText(dobUser);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -62,23 +83,51 @@ public class ProfileActivity extends AppCompatActivity {
             }
             return false;
         });
+
+       Button notificationButton = findViewById(R.id.notificationButton);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("mynotification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+        notificationButton.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
+            @Override
+            public void onClick(View view) {
+                sendNotification();
+            }
+        });
+
     }
 
-    public void showAllUserData() {
-        Intent intent = getIntent();
-        String nameUser = intent.getStringExtra("name");
-        String emailUser = intent.getStringExtra("email");
-        String usernameUser = intent.getStringExtra("username");
-        String passwordUser = intent.getStringExtra("password");
-        String dobUser = intent.getStringExtra("dob"); // Retrieve DOB from intent
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void sendNotification() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "mynotification")
+                .setSmallIcon(R.drawable.baseline_message_24)
+                .setContentTitle("Notification")
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+        Intent intent = new Intent(this, notification.class);
+        intent.putExtra("message", message);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager manager = getSystemService(NotificationManager.class);
+        manager.notify(1, builder.build());
+    }
 
-        titleName.setText(nameUser);
-        titleUsername.setText(usernameUser);
-        profileName.setText(nameUser);
-        profileEmail.setText(emailUser);
-        profileUsername.setText(usernameUser);
-        profilePassword.setText(passwordUser);
-        profileDOB.setText(dobUser); // Set the retrieved DOB
+
+    public void showAllUserData() {
+
+        Intent intent = getIntent();
+        if (intent.hasExtra("FROM_ACTIVITY_1")){
+            nameUser = intent.getStringExtra("name");
+            emailUser = intent.getStringExtra("email");
+            usernameUser = intent.getStringExtra("username");
+            passwordUser = intent.getStringExtra("password");
+            dobUser = intent.getStringExtra("dob");
+        }
+        // Set the retrieved DOB
     }
 
     @Override
@@ -91,6 +140,10 @@ public class ProfileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.About) {
+            Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+            return true;
+        }
+        if (id == R.id.Notification) {
             Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
             return true;
         }
