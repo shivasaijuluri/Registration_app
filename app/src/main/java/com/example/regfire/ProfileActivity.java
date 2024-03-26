@@ -3,6 +3,7 @@ package com.example.regfire;
 import static com.example.regfire.R.id.bottomNavigationView;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +28,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class ProfileActivity extends AppCompatActivity {
     String message = "Hello, this is your notification in detail!!!";
 
-
     TextView profileName, profileEmail, profileUsername, profilePassword, profileDOB;
     TextView titleName, titleUsername, titleDOB;
     public static String nameUser, emailUser, usernameUser, passwordUser, dobUser;
+
+    Dialog dialog;
+    Button btnDialogCancel,btnDialogLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,10 +44,10 @@ public class ProfileActivity extends AppCompatActivity {
         profileEmail = findViewById(R.id.profileEmail);
         profileUsername = findViewById(R.id.profileUsername);
         profilePassword = findViewById(R.id.profilePassword);
-        profileDOB = findViewById(R.id.profileDOB); // Initialize the TextView for DOB
+        profileDOB = findViewById(R.id.profileDOB);
         titleName = findViewById(R.id.titleName);
         titleUsername = findViewById(R.id.titleUsername);
-        titleDOB = findViewById(R.id.titleDOB); // Initialize the TextView for DOB
+        titleDOB = findViewById(R.id.titleDOB);
 
         showAllUserData();
 
@@ -77,8 +81,9 @@ public class ProfileActivity extends AppCompatActivity {
 //                return true;
 //            }
             else if (item.getItemId() == R.id.bottom_logout) {
-                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                finish();
+//                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+//                finish();
+                dialog.show();
                 return true;
             }
             return false;
@@ -97,6 +102,35 @@ public class ProfileActivity extends AppCompatActivity {
                 sendNotification();
             }
         });
+
+
+        dialog = new Dialog(ProfileActivity.this);
+        dialog.setContentView(R.layout.custom_dialog_box);
+        dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        dialog.getWindow().setBackgroundDrawable(getDrawable(R.drawable.custom_dialog_box));
+        dialog.setCancelable(false);
+
+        btnDialogLogout=dialog.findViewById(R.id.button_exit);
+        btnDialogCancel=dialog.findViewById(R.id.button_cancel);
+
+        btnDialogCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        btnDialogLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                finish();
+                dialog.dismiss();
+
+            }
+        });
+
+
 
     }
 
@@ -145,6 +179,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
         if (id == R.id.Notification) {
             Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
+            sendNotification();
             return true;
         }
         return super.onOptionsItemSelected(item);
