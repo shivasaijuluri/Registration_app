@@ -170,18 +170,5 @@ public class ProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.About) {
-            Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id == R.id.Notification) {
-            Toast.makeText(this, "About", Toast.LENGTH_SHORT).show();
-            sendNotification();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+
 }
